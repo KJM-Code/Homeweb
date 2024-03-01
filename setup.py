@@ -22,6 +22,12 @@ def run_module_setup(path,setup_file='setup.py'):
     if os.path.isfile(os.path.join(path,setup_file)):
         subprocess.run([f'python',os.path.join(path,setup_file)],check=True)
 
+def run_requirements_setup(path,requirements_file='requirements.txt'):
+    if os.path.isfile(os.path.join(path,requirements_file)):
+        subprocess.run(
+            ['pip', 'install', '-r', os.path.join(path, requirements_file)],
+            check=True)
+
 
 user_selection = None
 available_options = ['Install Modules','Update Modules','Update Homeweb']
@@ -67,18 +73,24 @@ while True:
                 moduleSelection = int(moduleSelection)
                 if moduleSelection == 1:
                     for available_module in available_install_modules:
-                        git.Repo.clone_from(available_module[1], os.path.join(working_path,'modules',available_module[2]))
-                        run_module_setup(os.path.join(working_path,'modules',available_module[2]))
-                        subprocess.run(
-                            ['pip', 'install', '-r', os.path.join(working_path, 'modules',available_module[2],'requirements.txt')],
-                            check=True)
+                        if available_module[2] not in available_update_modules:
+                            git.Repo.clone_from(available_module[1], os.path.join(working_path,'modules',available_module[2]))
+                            run_module_setup(os.path.join(working_path,'modules',available_module[2]))
+                            run_requirements_setup(
+                                os.path.join(working_path, 'modules', available_module[2]))
+                        else:
+                            print(f"Skipping {available_module[2]}, already installed in folder \"{available_module[2]}\".")
 
                 else:
-                    git.Repo.clone_from(available_install_modules[moduleSelection-2][1],os.path.join(working_path,'modules',available_install_modules[moduleSelection-2][2]))
-                    subprocess.run(
-                        ['pip', 'install', '-r', os.path.join(working_path, 'modules',available_install_modules[moduleSelection-2][2], 'requirements.txt')],
-                        check=True)
-                    run_module_setup(os.path.join(working_path,'modules',available_install_modules[moduleSelection-2][2]))
+                    if available_install_modules[moduleSelection - 2][2] not in available_install_modules:
+                        git.Repo.clone_from(available_install_modules[moduleSelection-2][1],os.path.join(working_path,'modules',available_install_modules[moduleSelection-2][2]))
+                        run_module_setup(
+                            os.path.join(working_path, 'modules', available_install_modules[moduleSelection - 2][2]))
+                        run_requirements_setup(os.path.join(working_path, 'modules',available_install_modules[moduleSelection-2][2]))
+                    else:
+                        print(f"Skipping {available_install_modules[moduleSelection-2][0]}, already installed in folder \"{available_install_modules[moduleSelection-2][0]}\".")
+
+
                 break
             except Exception as e:
                 print("\nInvalid selection.")
@@ -89,7 +101,7 @@ while True:
         if len(available_update_modules) > 0:
             while True:
                 try:
-                    print("Select the following module to update:")
+                    print("\nSelect the following module to update:")
                     print('1) Update All Modules')
                     for mod_indx, update_module in enumerate(available_update_modules):
                         print(f"{mod_indx + 2}) {update_module}")
@@ -105,9 +117,7 @@ while True:
                             repo.remotes.origin.pull()
                             if os.path.isfile(os.path.join(working_path,currModulePath, 'requirements.txt')):
                                 print("Installing Dependencies...")
-                                subprocess.run(
-                                    ['pip', 'install', '-r', os.path.join(working_path,currModulePath, 'requirements.txt')],
-                                    check=True)
+                                run_requirements_setup(os.path.join(working_path,currModulePath))
                                 run_module_setup(os.path.join(working_path,currModulePath))
                                 print("Dependencies Installed Correctly.")
 
@@ -120,7 +130,7 @@ while True:
 
                         if os.path.isfile(os.path.join(working_path,currModulePath,'requirements.txt')):
                             print("Installing Dependencies...")
-                            subprocess.run(['pip', 'install', '-r', os.path.join(working_path,currModulePath,'requirements.txt')], check=True)
+                            run_requirements_setup(os.path.join(working_path, currModulePath))
                             run_module_setup(os.path.join(working_path,currModulePath))
                             print("Dependencies Installed Correctly.")
 
@@ -142,7 +152,7 @@ while True:
 
         if os.path.isfile(os.path.join(working_path,currModulePath, 'requirements.txt')):
             print("Installing Dependencies...")
-            subprocess.run(['pip', 'install', '-r', os.path.join(working_path,currModulePath, 'requirements.txt')], check=True)
+            run_requirements_setup(os.path.join(working_path, currModulePath))
 
         if currentCommit != repo.head.commit:
             print("Updates to Homeweb have been made.")
