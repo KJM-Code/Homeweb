@@ -68,6 +68,7 @@ while True:
                 print(f"{mod_indx + 2}) {module[0]} {'[Installed]' if module[2] in available_update_modules else ''}")
             try:
                 moduleSelection = input(">> ")
+                print()
                 if moduleSelection.lower() in ['quit', 'q']:
                     break
                 moduleSelection = int(moduleSelection)
