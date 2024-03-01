@@ -1,18 +1,26 @@
 # HomeWeb
 
-<a href="https://ko-fi.com/D1D4V03ZY"><img style="float: right;" src="https://ko-fi.com/img/githubbutton_sm.svg"></a>
+
+<div style="float:right;width:50%">
+    <a href="https://ko-fi.com/D1D4V03ZY"><img style="margin-bottom:10px;float: right;" src="https://ko-fi.com/img/githubbutton_sm.svg"></a>
+    <img style="float: right;" src="sample_images/landing_page.png" title="Landing Page">
+  </div>
+
 
 A basic Flask server to host my modules on.
+<ul>
+  <li>Very basic interface. Shows available modules, click to navigate to the selected module.</li> 
+  <li>Put your own wallpapers in the static/ folder labeled 'landing_page_wallpaper'.</li> 
+  <li>Accepts ['png','jpg','webp'] file types.</li>
+</ul>
 
-![Landing Page](sample_images/landing_page.png)
-* Very basic interface. Shows available modules, click to navigate to the selected module. 
-* Put your own wallpapers in the static/ folder labeled 'landing_page_wallpaper'. 
-  * Accepts ['png','jpg','webp'] file types.
+
+
 
 ## Requirements
 * Postgres Database installed
-* Git (Included in one-click installation)
-* Python 3.10.9 (Included in one-click installation)
+* Git (Included in the installer)
+* Python 3.10.9 (Included in installer)
 
 
 ## Features
@@ -22,8 +30,8 @@ A basic Flask server to host my modules on.
 ## Installation
 For the one-click installer:
 * Download the latest release, and put the contents in a new folder.
-* Run the install_homeweb.bat to have Git and Python installed in a self-contained environment.
-* If you wish to install any modules, follow the prompts within the install_homeweb.bat.
+* Run the Homeweb_Installation.bat to have Git and Python installed in a self-contained environment.
+* If you wish to install any modules, follow the prompts within the Homeweb_Installation.bat.
 
 ## Usage
 * Run the provided `run_webserver.bat`
