@@ -70,7 +70,7 @@ while True:
                         git.Repo.clone_from(available_module[1], os.path.join(working_path,'modules',available_module[2]))
                         run_module_setup(os.path.join(working_path,'modules',available_module[2]))
                         subprocess.run(
-                            ['pip', 'install', '-r', os.path.join(working_path, 'modules','available_module[2]','requirements.txt')],
+                            ['pip', 'install', '-r', os.path.join(working_path, 'modules',available_module[2],'requirements.txt')],
                             check=True)
 
                 else:
