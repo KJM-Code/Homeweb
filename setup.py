@@ -69,9 +69,15 @@ while True:
                     for available_module in available_install_modules:
                         git.Repo.clone_from(available_module[1], os.path.join(working_path,'modules',available_module[2]))
                         run_module_setup(os.path.join(working_path,'modules',available_module[2]))
+                        subprocess.run(
+                            ['pip', 'install', '-r', os.path.join(working_path, 'modules','available_module[2]','requirements.txt')],
+                            check=True)
 
                 else:
                     git.Repo.clone_from(available_install_modules[moduleSelection-2][1],os.path.join(working_path,'modules',available_install_modules[moduleSelection-2][2]))
+                    subprocess.run(
+                        ['pip', 'install', '-r', os.path.join(working_path, 'modules',available_install_modules[moduleSelection-2][2], 'requirements.txt')],
+                        check=True)
                     run_module_setup(os.path.join(working_path,'modules',available_install_modules[moduleSelection-2][2]))
                 break
             except Exception as e:
