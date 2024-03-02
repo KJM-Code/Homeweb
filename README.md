@@ -1,11 +1,6 @@
 # HomeWeb
 
-
-<div style="float:right;width:50%">
-    <a href="https://ko-fi.com/D1D4V03ZY"><img style="margin-bottom:10px;float: right;" src="https://ko-fi.com/img/githubbutton_sm.svg"></a>
-    <img style="float: right;" src="sample_images/landing_page.png" title="Landing Page">
-  </div>
-
+<a href="https://ko-fi.com/D1D4V03ZY"><img style="margin-bottom:10px;float: right;" src="https://ko-fi.com/img/githubbutton_sm.svg"></a>
 
 A basic Flask server to host my modules on.
 <ul>
@@ -13,6 +8,8 @@ A basic Flask server to host my modules on.
   <li>Put your own wallpapers in the static/ folder labeled 'landing_page_wallpaper'.</li> 
   <li>Accepts ['png','jpg','webp'] file types.</li>
 </ul>
+
+<img style="float: right;width:400px;" src="sample_images/landing_page.png" title="Landing Page">
 
 
 
