@@ -1,15 +1,24 @@
 # HomeWeb
 
-<a href="https://ko-fi.com/D1D4V03ZY"><img style="margin-bottom:10px;float: right;" src="https://ko-fi.com/img/githubbutton_sm.svg"></a>
+<a href="https://ko-fi.com/D1D4V03ZY"><img style="margin-bottom:10px;" src="https://ko-fi.com/img/githubbutton_sm.svg"></a>
 
 A basic Flask server to host my modules on.
+
+## Available Modules
+* [ImageSorter](https://github.com/KJM-Code/ImageSorter)
+  * Image Tagging/Searching module.
+* [Users](https://github.com/KJM-Code/module_hw_user)
+  * Simple user login/registration interface. 
+  * If not installed, defaults to no login requirement.
+
+
 <ul>
   <li>Very basic interface. Shows available modules, click to navigate to the selected module.</li> 
   <li>Put your own wallpapers in the static/ folder labeled 'landing_page_wallpaper'.</li> 
   <li>Accepts ['png','jpg','webp'] file types.</li>
 </ul>
 
-<img style="float: right;width:400px;" src="sample_images/landing_page.png" title="Landing Page">
+<img src="sample_images/landing_page.png" title="Landing Page">
 
 
 
@@ -33,12 +42,7 @@ For the one-click installer:
 ## Usage
 * Run the provided `run_webserver.bat`
 
-## Available Modules
-* [ImageSorter](https://github.com/KJM-Code/ImageSorter)
-  * Image Tagging/Searching module.
-* [Users](https://github.com/KJM-Code/module_hw_user)
-  * Simple user login/registration interface. Can replace with your own. 
-  * If not installed, defaults to no login requirement.
+
   
 ## Launch Parameters
 Here are the available parameters you can use when launching the server:
