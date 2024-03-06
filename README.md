@@ -18,12 +18,12 @@ A basic Flask server to host my modules on.
   <li>Accepts ['png','jpg','webp'] file types.</li>
 </ul>
 
-<img src="sample_images/landing_page.png" title="Landing Page">
 
 
 
 
 ## Requirements
+> :warning: This has only been tested on a windows environment.
 * Postgres Database installed
 * Git (Included in the installer)
 * Python 3.10.9 (Included in installer)
@@ -41,6 +41,7 @@ For the one-click installer:
 
 ## Usage
 * Run the provided `run_webserver.bat`
+  * Be sure to set the parameters.
 
 
   
