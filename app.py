@@ -3,6 +3,7 @@ import os
 import importlib
 
 import sqlalchemy
+from sqlalchemy.schema import CreateSchema
 
 import flask
 from flask import Blueprint,send_from_directory,render_template,url_for
@@ -110,27 +111,37 @@ def get_app(**kwargs):
 
     with app.app_context():
         # get all the tables defined in your models
-        db.create_all()
         tables = db.Model.metadata.tables.values()
 
         # group the tables by schema
         schemas = []
-        for table in tables:
-            schema_name = table.schema
-            if schema_name not in schemas:
-                schemas.append(schema_name)
+        # for table in tables:
+        #     schema_name = table.schema
+        #     if schema_name not in schemas:
+        #         schemas.append(schema_name)
+        #         print(1111,schemas,schema_name)
         for schema in schemas_list:
             if schema not in schemas:
                 schemas.append(schema)
 
         # create the schemas
-        if len(schemas) > 0:
-            print("Schemas to create:",schemas)
+        # if len(schemas) > 0:
+        #     print("Schemas to create:",schemas)
         with db.engine.connect() as conn:
+
             for schema_name in schemas:
                 if not conn.dialect.has_schema(conn, schema_name):
-                    conn.execute(sqlalchemy.schema.CreateSchema(schema_name))
-            db.session.commit()
+                    while True:
+                        allowSchema = input(f'Allow schema creation: {schema_name} \n (T/F) >> ')
+                        if allowSchema.upper() == 'T':
+                            print('creating schema:',schema_name)
+                            conn.execute(CreateSchema(schema_name))
+                            conn.commit()
+                            break
+                        elif allowSchema.upper() == 'F':
+                            raise Exception("Schema Not Created. Unable to continue, please remove the associated module or create the schema to continue.")
+
+        db.create_all()
 
 
 
