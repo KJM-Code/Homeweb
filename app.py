@@ -110,26 +110,8 @@ def get_app(**kwargs):
 
 
     with app.app_context():
-        # get all the tables defined in your models
-        tables = db.Model.metadata.tables.values()
-
-        # group the tables by schema
-        schemas = []
-        # for table in tables:
-        #     schema_name = table.schema
-        #     if schema_name not in schemas:
-        #         schemas.append(schema_name)
-        #         print(1111,schemas,schema_name)
-        for schema in schemas_list:
-            if schema not in schemas:
-                schemas.append(schema)
-
-        # create the schemas
-        # if len(schemas) > 0:
-        #     print("Schemas to create:",schemas)
         with db.engine.connect() as conn:
-
-            for schema_name in schemas:
+            for schema_name in schemas_list:
                 if not conn.dialect.has_schema(conn, schema_name):
                     while True:
                         allowSchema = input(f'Allow schema creation: {schema_name} \n (T/F) >> ')
